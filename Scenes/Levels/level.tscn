@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://vc8mdrjqwfo0"]
+
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_uauld"]
+[ext_resource type="PackedScene" uid="uid://w1c1anvracgl" path="res://card.tscn" id="2_mgyo4"]
+[ext_resource type="Shader" path="res://Scenes/Levels/2dPerspectiveShader.gdshader" id="3_u2l0h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqjmm"]
+resource_local_to_scene = true
+shader = ExtResource("3_u2l0h")
+shader_parameter/fov = 25.0
+shader_parameter/cull_back = false
+shader_parameter/y_rot = 180.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_uauld")
+
+[node name="Card" parent="." instance=ExtResource("2_mgyo4")]
+visible = false
+material = SubResource("ShaderMaterial_fqjmm")
+position = Vector2(994, 454)

@@ -1,0 +1,151 @@
+[gd_scene load_steps=11 format=3 uid="uid://w1c1anvracgl"]
+
+[ext_resource type="Shader" path="res://Scenes/Levels/2dPerspectiveShader.gdshader" id="1_og0mq"]
+[ext_resource type="Texture2D" uid="uid://bshgypt1kx0yc" path="res://Scenes/Card_Images/Back.png" id="2_xq0qy"]
+[ext_resource type="Script" path="res://Scripts/cardFlipEvent.gd" id="3_yvtrw"]
+[ext_resource type="Texture2D" uid="uid://c07bgi0nvgy0q" path="res://Scenes/Card_Images/Zelda-Spirit-Tracks.png" id="4_uxln3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7diek"]
+resource_local_to_scene = true
+shader = ExtResource("1_og0mq")
+shader_parameter/fov = 25.0
+shader_parameter/cull_back = false
+shader_parameter/y_rot = 180.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="Animation" id="Animation_phc6c"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_s4b6s"]
+resource_name = "flip_to_Back"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-1, 0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/y_rot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 18.0, 90.0, 162.0, 180.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Front:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, -1, -1]
+}
+
+[sub_resource type="Animation" id="Animation_omuiw"]
+resource_name = "flip_to_front"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:z_index")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, -1, -1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:material:shader_parameter/y_rot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [8.55e-06, 16.0, 90.0, 162.0, 180.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Front:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-1, 0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_ebs3g"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0at1"]
+_data = {
+"RESET": SubResource("Animation_phc6c"),
+"flip_to_Back": SubResource("Animation_s4b6s"),
+"flip_to_front": SubResource("Animation_omuiw"),
+"new_animation": SubResource("Animation_ebs3g")
+}
+
+[node name="Card" type="Sprite2D"]
+z_as_relative = false
+material = SubResource("ShaderMaterial_7diek")
+position = Vector2(609, 278)
+texture = ExtResource("2_xq0qy")
+region_rect = Rect2(8, 30.5, 101, 89.5)
+script = ExtResource("3_yvtrw")
+
+[node name="Front" type="Sprite2D" parent="."]
+z_index = -1
+z_as_relative = false
+texture_filter = 5
+use_parent_material = true
+texture = ExtResource("4_uxln3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a0at1")
+}
