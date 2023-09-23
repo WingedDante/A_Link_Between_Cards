@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://w1c1anvracgl" path="res://card.tscn" id="2_mgyo4"]
 [ext_resource type="Shader" path="res://Scenes/Levels/2dPerspectiveShader.gdshader" id="3_u2l0h"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqjmm"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqgj7"]
 resource_local_to_scene = true
 shader = ExtResource("3_u2l0h")
 shader_parameter/fov = 25.0
@@ -18,5 +18,5 @@ script = ExtResource("1_uauld")
 
 [node name="Card" parent="." instance=ExtResource("2_mgyo4")]
 visible = false
-material = SubResource("ShaderMaterial_fqjmm")
+material = SubResource("ShaderMaterial_fqgj7")
 position = Vector2(994, 454)
