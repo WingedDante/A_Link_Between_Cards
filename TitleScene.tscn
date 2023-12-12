@@ -1,18 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd07oi0j2p1et"]
+[gd_scene load_steps=4 format=3 uid="uid://bd07oi0j2p1et"]
 
 [ext_resource type="Texture2D" uid="uid://cxdgjxvl4qi1j" path="res://Scenes/Card_Images/Title.png" id="1_06iwr"]
+[ext_resource type="Script" path="res://TitleScript.gd" id="1_h5et2"]
+[ext_resource type="Theme" uid="uid://c0nsndhgewta4" path="res://GameTheme.tres" id="3_kes1p"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_h5et2")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -35.0
 offset_top = -13.0
 offset_right = 1195.0
 offset_bottom = 655.0
+scale = Vector2(1.66532, 1.6905)
 color = Color(0.4375, 0.683594, 0.136719, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Title" type="Sprite2D" parent="."]
-position = Vector2(565, 423)
-scale = Vector2(0.77832, 0.77832)
+position = Vector2(856.25, 710.25)
+scale = Vector2(1.37842, 1.37842)
 texture = ExtResource("1_06iwr")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 723.0
+offset_top = 916.0
+offset_right = 988.0
+offset_bottom = 987.0
+scale = Vector2(1.95594, 1.95594)
+theme = ExtResource("3_kes1p")
+text = "START"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
