@@ -1,7 +1,7 @@
 class_name Card extends Sprite2D
 
 @export var flipLocked = false
-var isFront = false
+@export var isFront = false
 @onready var _aniPlayer = $AnimationPlayer
 @export var game_scene : Game
 @onready var _Highlight = $Highlight
@@ -19,15 +19,16 @@ func _input(event):
 
 
 func _on_animation_player_animation_finished(anim_name):
-	if (anim_name == "flip_to_front"):
-		Global.card_flipping = false
-		if (Global.card_to_compare_1 == null) :
-			Global.card_to_compare_1 = self
-		else :
-			Global.card_to_compare_2 = self
-	if (anim_name == "flip_to_Back"):
-		Global.card_flipping = false
-	game_scene.process_cards_flipped()
+	if (Global.game_started) :
+		if (anim_name == "flip_to_front"):
+			Global.card_flipping = false
+			if (Global.card_to_compare_1 == null) :
+				Global.card_to_compare_1 = self
+			else :
+				Global.card_to_compare_2 = self
+		if (anim_name == "flip_to_Back"):
+			Global.card_flipping = false
+		game_scene.process_cards_flipped()
 func reset():
 	isFront= false
 	_aniPlayer.play("flip_to_Back")
